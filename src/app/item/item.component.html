@@ -1,0 +1,20 @@
+<div class="item">
+  <input type="text" [id]="item.title" type="checkbox" (change)="item.done = !item.done" [checked]="item.done" />
+  <label [for]="item.title">{{item.title}}</label>
+
+  <div class="btn-container" *ngIf="!editable">
+    <button class="btn" (click)="editable = !editable">Edit</button>
+    <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
+  </div>
+
+  <div *ngIf="editable">
+
+    <input placeholder="edit item" [value]="item.title" #editedItem (keyup.enter)="saveItem(editedItem.value)" />
+
+    <div class="btn-container">
+      <button class="btn" (click)="editable = !editable">Cancel</button>
+      <button class="btn btn-save" (click)="saveItem(editedItem.value)">Save</button>
+    </div>
+
+  </div>
+</div>
