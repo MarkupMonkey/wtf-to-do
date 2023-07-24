@@ -1,19 +1,23 @@
-<div class="item">
-  <input type="text" [id]="item.title" type="checkbox" (change)="item.done = !item.done" [checked]="item.done" />
-  <label [for]="item.title">{{item.title}}</label>
-
-  <div class="btn-container" *ngIf="!editable">
-    <button class="btn" (click)="editable = !editable">Edit</button>
-    <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
+<div class="item" style="display: flex; justify-content: space-between; padding:0 0.5rem; align-items: center ;;">
+  <div *ngIf="!editable" class="w-36"
+    style="display: flex; justify-content:space-between; align-items: center; text-align: center; gap:3rem ">
+    <label [for]="item.title">{{item.title}}</label>
+    <input type="text" [id]="item.title" type="checkbox" (change)="item.done = !item.done" [checked]="item.done" />
   </div>
 
-  <div *ngIf="editable">
+  <div class="btn-container flex " *ngIf="!editable">
+    <button class="btn btn-menu border-2 rounded-md bg-gray-300 w-20" (click)="editable = !editable">Edit</button>
+    <button class="btn btn-menu border-2 rounded-md bg-gray-300 w-20 btn-warn" (click)="remove.emit()">Delete</button>
+  </div>
+
+  <div *ngIf="editable" style="display: flex;">
 
     <input placeholder="edit item" [value]="item.title" #editedItem (keyup.enter)="saveItem(editedItem.value)" />
 
-    <div class="btn-container">
-      <button class="btn" (click)="editable = !editable">Cancel</button>
-      <button class="btn btn-save" (click)="saveItem(editedItem.value)">Save</button>
+    <div class="btn-container flex ">
+      <button class="btn btn-menu border-2 rounded-md bg-red-500 w-20" (click)="editable = !editable">Cancel</button>
+      <button class="btn btn-save border-2 rounded-md bg-blue-500 w-20"
+        (click)="saveItem(editedItem.value)">Save</button>
     </div>
 
   </div>

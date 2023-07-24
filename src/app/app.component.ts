@@ -44,4 +44,17 @@ export class AppComponent {
     event.preventDefault()
     this.filter = filter;
   }
+
+  get doneItemsCount(): number {
+    return this.list.filter(item => item.done).length;
+  }
+
+  get activeItemsCount(): number {
+    return this.list.filter(item => !item.done).length;
+  }
+
+  removeDoneItems(event: Event) {
+    event.preventDefault();
+    this.list = this.list.filter(item => !item.done);
+  }
 }

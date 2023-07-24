@@ -1,35 +1,67 @@
-<form>
-  <h1>WTF to do?</h1>
-  <label for="insert-item-input">Tell me: </label>
-  <input #newItem type="text" id="insert-item-input" placeholder="wtf do you wanna do?" newItem.value=''>
-  <button (click)="addItem(newItem, $event)">+</button>
+<form style="text-align: center;">
+  <h1 class="border-4 rounded-lg w-96" [ngClass]="list.length === 0 ? 'red-text' : 'green-text'  ">
+    <span *ngIf="list.length === 0"> 🤌 </span>
+    Che devi fare?
+  </h1>
 
-  <div class="btn-wrapper">
-    <button class="btn btn-menu" [class.active]="filter == 'all'" (click)="setFilter('all', $event)">
-      All
-    </button>
 
-    <button class="btn btn-menu" [class.active]="filter == 'active'" (click)="setFilter('active',$event)">
-      To Do
-    </button>
+  <span *ngIf="activeItemsCount > 7"> let's do it</span>
+  <span *ngIf=" list.length === doneItemsCount && doneItemsCount > 3" class="green-text">Good job, let's go!</span>
+  <div class="border-2" style="display: flex;flex-direction:column; gap: 2rem">
+    <div class="flex border-2 " style="display: flex;gap: 0.4rem; ;">
+      <label for=" insert-item-input">Tell me: </label>
+      <input #newItem type="text" id="insert-item-input" placeholder="wtf do you wanna do?" newItem.value=''>
+      <button (click)="addItem(newItem, $event)">+</button>
 
-    <button class="btn btn-menu" [class.active]="filter == 'done'" (click)="setFilter('done',$event)">
+    </div>
+
+
+    <div class="border-2 btn-wrapper" style="display: flex; gap: 8px;">
+      <label>Filter by: </label>
+      <button class="btn btn-menu border-2 rounded-md bg-gray-300 w-20" [class.active]="filter == 'all'"
+        (click)="setFilter('all', $event)">
+        All
+      </button>
+
+      <button class="btn btn-menu border-2 rounded-md bg-gray-300 w-20" [class.active]="filter == 'active'"
+        (click)="setFilter('active',$event)">
+        To Do
+      </button>
+
+      <button class="btn btn-menu border-2 rounded-md bg-gray-300 w-20" [class.active]="filter == 'done'"
+        (click)="setFilter('done',$event)">
+        Done
+      </button>
+    </div>
+
+    <button class="btn bg-red-400 border-4 rounded-lg text-gray-600 text-xs " style="max-width: fit-content;"
+      (click)="removeDoneItems($event)">Remove
       Done
-    </button>
+      Items</button>
+
   </div>
 </form>
 
-<div id="list-container">
-  <h2>
-    {{items.length}}
-    <span *ngIf="items.length === 1; else elseBlock">item</span>
-    <ng-template #elseBlock>items</ng-template>
-  </h2>
+<div class="border-4 rounded-lg" id="list-container"
+  style="display: flex; flex-direction: column; align-items: center;">
 
-  <ul>
+  <ul class="w-full">
     <li *ngFor="let item of items">
       <app-item (remove)="remove(item)" [item]="item"></app-item>
     </li>
   </ul>
+  <div class="flex border-2 w-full" style="justify-content: baseline; gap: 6rem">
+    <h4>
+      {{activeItemsCount}}
+      <span *ngIf="activeItemsCount === 1; else elseBlock">item</span>
+      <ng-template #elseBlock>items</ng-template> active
+    </h4>
 
+    <!-- fare in modo che ci siano tre voci done active all-->
+    <h4>
+      {{doneItemsCount}}
+      <span *ngIf="doneItemsCount === 1; else elseBlock">item</span>
+      <ng-template #elseBlock>items </ng-template> done
+    </h4>
+  </div>
 </div>
