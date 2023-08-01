@@ -7,25 +7,28 @@ import { Item } from '../items.model';
   styleUrls: ['./new-item.component.scss']
 })
 export class NewItemComponent {
-  @Input() list: Item[] = []
-  @Output() newItemAdded = new EventEmitter<Item>();
+  @Input() list: Item[] = [] /* Proprietà di input `list`.
+  Accetta un array di oggetti `Item` dal componente genitore.*/
+  @Output() newItemAdded = new EventEmitter<Item>(); /* Proprietà di output `newItemAdded`.
+   Emette eventi al componente genitore.*/
 
-  childInput: string = '';
+  childInput: string = ''; /* Definizione di una variabile stringa vuota `childInput`.
+  Non è utilizzata nel codice fornito.*/
 
 
+  // Metodo `addItem` che accetta un input HTML (o qualsiasi tipo di dato) e un oggetto Event.
   addItem(newItemInput: HTMLInputElement | any, event: Event) {
-    event.preventDefault();
+    event.preventDefault(); // Previene il comportamento di default dell'evento (ad es., refresh della pagina per un evento di invio del form).
+
+    // Verifica se `newItemInput` ha una proprietà `value` e se questa non è una stringa vuota.
     if ('value' in newItemInput && newItemInput.value.trim() !== '') {
-      const newItem: Item = {
-        title: newItemInput.value,
-        done: false
+      const newItem: Item = { // Crea un nuovo oggetto `Item`.
+        title: newItemInput.value, // Imposta il titolo come il valore dell'`newItemInput`.
+        done: false // Imposta la proprietà `done` su `false`.
       };
-      this.newItemAdded.emit(newItem);
-      newItemInput.value = '';
+
+      this.newItemAdded.emit(newItem); // Emite l'evento `newItemAdded` con il `newItem` come payload.
+      newItemInput.value = ''; // Azzera il valore di `newItemInput` (imposta su stringa vuota), probabilmente per pulire il campo di input nella UI.
     }
   }
-
-
-
-
 }

@@ -1,9 +1,9 @@
-<div class="bg-gray-100 w-100 flex justify-between text-center">
+<div class="bg-gray-100 border-2 rounded-md w-100 flex w-100 flex justify-evenly text-center">
   <form style="text-align: center;">
-    <div class="flex border-2 w-100 flex">
-      <label for=" insert-item-input">Tell me: </label>
-      <input #newItem type="text" id="insert-item-input" placeholder="wtf do you wanna do?" newItem.value=''>
-      <button (click)="addItem(newItem, $event)">+</button>
+    <div class="flex border-2 rounded-md w-100 flex">
+      <label for="insert-item-input">Tell me: </label>
+      <input #newItem class="border-2 rounded-md w-100 flex" type="text" id="insert-item-input" placeholder="wtf do you wanna do?" >
+      <button class="bg-blue-300 w-12 rounded-xl" (click)="addItem(newItem, $event)">+</button>
     </div>
   </form>
 </div>
