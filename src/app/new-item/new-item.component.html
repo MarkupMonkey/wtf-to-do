@@ -1,6 +1,6 @@
-<div class="border-2" style="display: flex;flex-direction:column; gap: 2rem">
+<div class="bg-gray-100 w-100 flex justify-between text-center">
   <form style="text-align: center;">
-    <div class="flex border-2 " style="display: flex;gap: 0.4rem; ;">
+    <div class="flex border-2 w-100 flex">
       <label for=" insert-item-input">Tell me: </label>
       <input #newItem type="text" id="insert-item-input" placeholder="wtf do you wanna do?" newItem.value=''>
       <button (click)="addItem(newItem, $event)">+</button>

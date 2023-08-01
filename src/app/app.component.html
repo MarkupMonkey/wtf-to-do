@@ -1,14 +1,14 @@
-<div class="container">
+<div class="container pt-10 ">
   <app-header [list]="list"></app-header>
 
   <app-new-item (newItemAdded)="onNewItemAdded($event)"></app-new-item>
   <app-filters [filter]="filter" [list]="list" (filterChange)="filter = $event"
     (listChange)="list = $event"></app-filters>
 
-  <div class="border-4 rounded-lg" id="list-container"
-    style="display: flex; flex-direction: column; align-items: center;">
+  <div class="border-4 rounded-lg flex" id="list-container"
+    style="display: flex; flex-direction: column; align-items: center; min-height: 300px;">
 
     <app-list [list]="list" [filter]="filter"></app-list>
-    <app-counter [list]="list"></app-counter>
   </div>
+  <app-counter [list]="list"></app-counter>
 </div>
