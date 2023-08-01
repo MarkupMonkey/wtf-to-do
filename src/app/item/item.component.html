@@ -1,13 +1,13 @@
-<div class="item w-100" style="display: flex; justify-content: space-between; padding:0 0.5rem; align-items: center ;;">
-  <div *ngIf="!editable" class="w-36"
+<div class="item flex flew-row justify-between w-100" >
+  <div *ngIf="!editable" class="w-100"
     style="display: flex; justify-content:space-between; align-items: center; text-align: center; gap:3rem ">
     <label [for]="item.title">{{item.title}}</label>
-    <input type="text" [id]="item.title" type="checkbox" (change)="item.done = !item.done" [checked]="item.done" />
+    <input [id]="item.title" type="checkbox" (change)="item.done = !item.done" [checked]="item.done" />
   </div>
 
   <div class="btn-container flex " *ngIf="!editable">
-    <button class="btn btn-menu border-2 rounded-md bg-gray-300 w-20" (click)="editable = !editable">Edit</button>
-    <button class="btn btn-menu border-2 rounded-md bg-gray-300 w-20 btn-warn" (click)="remove.emit()">Delete</button>
+    <button class="btn btn-menu border-2 rounded-md bg-gray-300 w-12" (click)="editable = !editable">Edit</button>
+    <button class="btn btn-menu border-2 rounded-md bg-red-300 w-6 btn-warn" (click)="remove.emit()">X</button>
   </div>
 
   <div *ngIf="editable" style="display: flex;">
@@ -15,7 +15,7 @@
     <input placeholder="edit item" [value]="item.title" #editedItem (keyup.enter)="saveItem(editedItem.value)" />
 
     <div class="btn-container flex ">
-      <button class="btn btn-menu border-2 rounded-md bg-red-500 w-20" (click)="editable = !editable">Cancel</button>
+      <button class="btn btn-menu border-2 rounded-md 300 w-20" (click)="editable = !editable">Cancel</button>
       <button class="btn btn-save border-2 rounded-md bg-blue-500 w-20"
         (click)="saveItem(editedItem.value)">Save</button>
     </div>

@@ -1,4 +1,4 @@
-<div class=" btn-wrapper" style="display: flex; gap: 8px;">
+<div class=" btn-wrapper text-xs gap:8">
   <label>Filter by: </label>
   <button class="btn btn-menu border-2 rounded-md bg-gray-300 w-20" [class.active]="filter == 'all'"
     (click)="setFilter('all', $event)">
@@ -15,8 +15,6 @@
     Done
   </button>
 
-  <button class="btn bg-red-400 border-4 rounded-lg text-gray-600 text-xs " style="max-width: fit-content;"
-    (click)="removeDoneItems($event)">Remove
-    Done
-    Items</button>
+  <button class="btn bg-red-300 border-4 rounded-lg text-gray-600  " style="max-width: fit-content;"
+    (click)="removeDoneItems($event)">Remove Done</button>
 </div>
