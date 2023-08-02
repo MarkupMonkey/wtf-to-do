@@ -1,14 +1,14 @@
-<div class="flex border-2 w-full" style="justify-content: baseline; gap: 6rem">
+<div class="flex border-2 w-full flex justify-around">
   <h4>
     {{activeItemsCount}}
     <span *ngIf="activeItemsCount === 1; else elseBlock">item</span>
-    <ng-template #elseBlock>items</ng-template> active
+    <ng-template #elseBlock>active</ng-template>
   </h4>
 
   <!-- fare in modo che ci siano tre voci done active all-->
   <h4>
     {{doneItemsCount}}
     <span *ngIf="doneItemsCount === 1; else elseBlock">item</span>
-    <ng-template #elseBlock>items </ng-template> done
+    <ng-template #elseBlock>done</ng-template>
   </h4>
 </div>
