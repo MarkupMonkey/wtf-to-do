@@ -9,10 +9,7 @@ import { Item } from '../items.model';
 export class HeaderComponent {
   title = 'wtf-to-do';
   @Input() list: Item[] = [
-    { title: "wake up", done: true },
-    { title: "fitness", done: true },
-    { title: "eat", done: false },
-    { title: "meditation", done: true },
+
   ]
 
 }
