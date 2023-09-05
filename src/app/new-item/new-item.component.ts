@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Item } from '../items.model';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Todo } from '../todo.model';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-new-item',
@@ -7,24 +9,33 @@ import { Item } from '../items.model';
   styleUrls: ['./new-item.component.scss']
 })
 export class NewItemComponent {
-  @Input() list: Item[] = []
-  @Output() newItemAdded = new EventEmitter<Item>();
+  @Output() newItemAdded = new EventEmitter<Todo>();
 
+  newItemForm: FormGroup;
 
-  childInput: string = '';
+  constructor(
+    private formBuilder: FormBuilder,
+    private todoService: TodoService
+  ) {
+    this.newItemForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+    });
+  }
 
-
-  addItem(newItemInput: HTMLInputElement | any, event: Event) {
-    event.preventDefault();
-
-    if ('value' in newItemInput && newItemInput.value.trim() !== '') {
-      const newItem: Item = {
-        title: newItemInput.value,
-        done: false
+  addItem() {
+    if (this.newItemForm.valid) {
+      const newItem: Todo = {
+        id: 'ahsnUFHOIU',
+        name: this.newItemForm.value.name,
+        description: this.newItemForm.value.description,
+        state: false
       };
 
-      this.newItemAdded.emit(newItem);
-      newItemInput.value = '';
+      this.todoService.addTodo(newItem).subscribe(response => {
+        this.newItemAdded.emit(newItem);
+        this.newItemForm.reset();
+      });
     }
   }
 }

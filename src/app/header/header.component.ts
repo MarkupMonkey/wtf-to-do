@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Item } from '../items.model';
+import { Todo } from '../todo.model';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +8,7 @@ import { Item } from '../items.model';
 })
 export class HeaderComponent {
   title = 'wtf-to-do';
-  @Input() list: Item[] = [
+  @Input() list: Todo[] = [
 
   ]
 

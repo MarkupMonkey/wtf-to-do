@@ -1,9 +1,13 @@
 <div class="bg-gray-100 border-2 rounded-md w-100 flex w-100 flex justify-evenly text-center">
-  <form style="text-align: center;">
+  <form [formGroup]="newItemForm" (ngSubmit)="addItem()" style="text-align: center;">
     <div class="flex border-2 rounded-md w-100 flex">
-      <label for="insert-item-input">Tell me: </label>
-      <input #newItem class="border-2 rounded-md w-100 flex" type="text" id="insert-item-input" placeholder="wtf do you wanna do?" >
-      <button class="bg-blue-300 w-12 rounded-xl" (click)="addItem(newItem, $event)">+</button>
+      <label for="insert-item-input">Name: </label>
+      <input #newItem class="border-2 rounded-md w-100 flex" type="text" id="insert-item-input" placeholder="name"
+        formControlName="name">
+      <label for="insert-item-description-input">Description: </label>
+      <input #newItemDescription class="border-2 rounded-md w-100 flex" type="text" id="insert-item-description-input"
+        placeholder="description" formControlName="description">
+      <button class=" bg-blue-300 w-12 rounded-xl" [disabled]="!newItemForm.valid">+</button>
     </div>
   </form>
 </div>

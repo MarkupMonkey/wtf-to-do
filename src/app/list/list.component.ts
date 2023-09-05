@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import { Item } from '../items.model';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Todo } from '../todo.model';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-list',
@@ -7,32 +8,50 @@ import { Item } from '../items.model';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit, OnChanges {
-  @Input() list: Item[] = [] || undefined;
-  @Output() newItemIput = new EventEmitter()
+  @Input() todos: Todo[] = [];
+  @Output() newItemInput = new EventEmitter<Todo>()
   @Input() filter: string = '';
 
-  displayedList: Item[] = [];
+  displayedList: Todo[] = [];
 
-  ngOnInit() {
-    this.displayedList = this.list;
+  constructor(private todoService: TodoService) { }
+
+  ngOnInit(): void {
+    this.fetchTodos();
   }
 
-  ngOnChanges() {
-    if (this.filter == 'active') {
-      this.displayedList = this.list.filter(item => !item.done);
-    }
-
-    else if (this.filter == 'done') {
-      this.displayedList = this.list.filter(item => item.done);
-    }
-
-    else {
-      this.displayedList = this.list;
-    }
-    console.log(this.displayedList)
+  ngOnChanges(): void {
+    this.filterTodos();
   }
 
-  remove(item: Item) {
-    this.list.splice(this.list.indexOf(item), 1);
+  fetchTodos(): void {
+    this.todoService.getTodos().subscribe(data => {
+      this.todos = data;
+      this.filterTodos();
+      console.log(data)
+    });
+  }
+
+  filterTodos(): void {
+    switch (this.filter) {
+      case 'to_complete':
+        this.displayedList = this.todos.filter(item => !item.state);
+        break;
+      case 'complete':
+        this.displayedList = this.todos.filter(item => item.state);
+        break;
+      default:
+        this.displayedList = this.todos;
+    }
+  }
+
+  remove(item: Todo): void {
+    this.todoService.deleteTodo(item.id).subscribe(response => {
+      const index = this.todos.findIndex(todo => todo.id === item.id);
+      if (index !== -1) {
+        this.todos.splice(index, 1);
+        this.filterTodos();
+      }
+    });
   }
 }

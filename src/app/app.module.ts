@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { AppComponent } from './app.component';
 import { ItemComponent } from './item/item.component';
@@ -17,10 +20,12 @@ import { CounterComponent } from './counter/counter.component';
     NewItemComponent,
     FiltersComponent,
     ListComponent,
-    CounterComponent
+    CounterComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,10 @@
-<div class="item flex flew-row justify-between w-100" >
+<div class="item flex flew-row justify-between w-100">
   <div *ngIf="!editable" class="w-100"
     style="display: flex; justify-content:space-between; align-items: center; text-align: center; gap:3rem ">
-    <label [for]="item.title">{{item.title}}</label>
-    <input [id]="item.title" type="checkbox" (change)="item.done = !item.done" [checked]="item.done" />
+    <label [for]="item.name">{{item.name}}</label>
+    <input [id]="item.name" type="checkbox" (change)="item.state = !item.state" [checked]="item.state" />
+    <label [for]="item.description">{{item.description}}</label>
+    <input [id]="item.description" type="checkbox" (change)="item.state = !item.state" [checked]="item.state" />
   </div>
 
   <div class="btn-container flex " *ngIf="!editable">
@@ -12,7 +14,7 @@
 
   <div *ngIf="editable" style="display: flex;">
 
-    <input placeholder="edit item" [value]="item.title" #editedItem (keyup.enter)="saveItem(editedItem.value)" />
+    <input placeholder="edit item" [value]="item.name" #editedItem (keyup.enter)="saveItem(editedItem.value)" />
 
     <div class="btn-container flex ">
       <button class="btn btn-menu border-2 rounded-md 300 w-20" (click)="editable = !editable">Cancel</button>

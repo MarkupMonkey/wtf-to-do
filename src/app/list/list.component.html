@@ -1,6 +1,6 @@
 <div>
   <ul class="w-full">
-    <li *ngFor="let item of displayedList">
+    <li *ngFor="let item of todos">
       <app-item (remove)="remove(item)" [item]="item"></app-item>
     </li>
   </ul>

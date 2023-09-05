@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Item } from '../items.model';
+import { Todo } from '../todo.model';
 
 @Component({
   selector: 'app-filters',
@@ -8,9 +8,9 @@ import { Item } from '../items.model';
 })
 export class FiltersComponent {
   @Input() filter: string = '';
-  @Input() list: Item[] = [] || undefined
+  @Input() list: Todo[] = [] || undefined
   @Output() filterChange = new EventEmitter<string>();
-  @Output() listChange = new EventEmitter<Item[]>();
+  @Output() listChange = new EventEmitter<Todo[]>();
 
   setFilter(filter: "all" | "active" | "done", event: Event) {
     event.preventDefault()
@@ -20,7 +20,7 @@ export class FiltersComponent {
 
   removeDoneItems(event: Event) {
     event.preventDefault();
-    this.list = this.list.filter(item => !item.done);
+    this.list = this.list.filter(item => !item.state);
     this.listChange.emit(this.list)
   }
 
